@@ -10,11 +10,13 @@ namespace ClasesParcial3.Data
 {
     public class AplicationDbContext : DbContext
     {
-        public DbSet<Class1> Class1s { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Producto> Producto { get; set; }
+        public DbSet<Venta> Venta { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(
-                "Server=LAPTOP-B9HDS386;Database=ProgramacionDB;Trusted_Connection=True;TrustServerCertificate=True;"
+                "Server=LAPTOP-B9HDS386;Database=ParcialDB;Trusted_Connection=True;TrustServerCertificate=True;"
                 
             );
         }

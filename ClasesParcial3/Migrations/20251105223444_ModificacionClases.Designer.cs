@@ -3,6 +3,7 @@ using ClasesParcial3.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ClasesParcial3.Migrations
 {
     [DbContext(typeof(AplicationDbContext))]
-    partial class AplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251105223444_ModificacionClases")]
+    partial class ModificacionClases
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,16 +88,11 @@ namespace ClasesParcial3.Migrations
                     b.Property<double>("PrecioVenta")
                         .HasColumnType("float");
 
-                    b.Property<int?>("VentaId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IdClienteId");
 
                     b.HasIndex("IdProductoId");
-
-                    b.HasIndex("VentaId");
 
                     b.ToTable("Venta");
                 });
@@ -113,18 +111,9 @@ namespace ClasesParcial3.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ClasesParcial3.Models.Venta", null)
-                        .WithMany("Ventas")
-                        .HasForeignKey("VentaId");
-
                     b.Navigation("IdCliente");
 
                     b.Navigation("IdProducto");
-                });
-
-            modelBuilder.Entity("ClasesParcial3.Models.Venta", b =>
-                {
-                    b.Navigation("Ventas");
                 });
 #pragma warning restore 612, 618
         }
