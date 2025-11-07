@@ -9,25 +9,22 @@ namespace ClasesParcial3.Repositories
 {
     public class ClienteRepository
     {
-        public static void RegistrarCliente(Models.Cliente cliente)
+        public static void RegistrarCliente(Cliente cliente)
         {
             using (var context = new Data.AplicationDbContext())
             {
-                Console.WriteLine("Ingrese Nombre del Cliente");
-                string nombreCliente = Console.ReadLine();
-                Console.WriteLine("Ingrese Email del Cliente");
-                string emailCliente = Console.ReadLine();
-                Console.WriteLine("Ingrese CUIT del Cliente");
-                int cuitCliente = int.Parse(Console.ReadLine());
-                cliente = new Models.Cliente
-                {
-                    Nombre = nombreCliente,
-                    Email = emailCliente,
-                    CUIT = cuitCliente
-                };
+                
                 context.Cliente.Add(cliente);
                 context.SaveChanges();
 
+            }
+        }
+        public static Cliente ObtenerClientePorId(int id)
+        {
+            using (var context = new Data.AplicationDbContext())
+            {
+                var cliente = context.Cliente.Find(id);
+                return cliente;
             }
         }
     }

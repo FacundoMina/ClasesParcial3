@@ -3,6 +3,7 @@ using ClasesParcial3;
 using ClasesParcial3.Models;
 using ClasesParcial3.Data;
 using ClasesParcial3.Repositories;
+using System.ComponentModel.DataAnnotations;
 do
 {
     Console.WriteLine("===============================");
@@ -21,16 +22,69 @@ do
     Console.Clear();
     if (Opcion == 1)
     {
-       ProductoRepository.RegistrarProducto();
+        
+        Console.Write("Ingrese el nombre del producto: ");
+        string nombre = Console.ReadLine();
 
+        Console.Write("Ingrese el precio del producto: ");
+        decimal precio = decimal.Parse(Console.ReadLine());
+
+        Console.Write("Ingrese la cantidad en stock: ");
+        int stock = int.Parse(Console.ReadLine());
+
+        
+        var producto = new Producto
+        {
+            Nombre = nombre,
+            Precio = precio,
+            Stock = stock
+        };
+
+        
+        ProductoRepository.RegistrarProducto(producto);
     }
     if (Opcion == 2)
     {
-        ClienteRepository.RegistrarCliente();
+        Console.Write("Ingrese el nombre del cliente: ");
+        string nombreCliente = Console.ReadLine();
+
+        Console.Write("Ingrese el correo del cliente: ");
+        string correoCliente = Console.ReadLine();
+
+        
+        var cliente = new Cliente
+        {
+            Nombre = nombreCliente,
+            
+        };
+
+        ClienteRepository.RegistrarCliente(cliente);
     }
     if (Opcion == 3)
     {
-        VentaRepository.RegistrarVenta();
+        
+        Console.Write("Ingrese el ID del cliente: ");
+        int clienteId = int.Parse(Console.ReadLine());
+
+        Console.Write("Ingrese el ID del producto: ");
+        int productoId = int.Parse(Console.ReadLine());
+
+        Console.Write("Ingrese la cantidad: ");
+        int cantidad = int.Parse(Console.ReadLine());
+
+        Cliente cliente = ClienteRepository.ObtenerClientePorId(clienteId);
+        Producto producto = ProductoRepository.ObtenerProductoPorId(productoId);
+
+        
+        double precioVenta = (double)(producto.Precio * cantidad);
+
+       
+        List<Venta> ventas = new List<Venta>();
+
+        
+        var venta = new Venta(0, cliente, producto, precioVenta, ventas);
+
+        VentaRepository.RegistrarVenta(venta);
     }
     if (Opcion == 4)
     {

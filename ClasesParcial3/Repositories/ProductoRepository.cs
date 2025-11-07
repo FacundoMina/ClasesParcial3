@@ -12,25 +12,28 @@ namespace ClasesParcial3.Repositories
     {
         public static void RegistrarProducto(Producto producto)
         {
-            Console.WriteLine("Ingrese Nombre del Producto");
-            string nombreProducto = Console.ReadLine();
-            Console.WriteLine("Ingrese ID del Producto");
-            int idProducto = int.Parse(Console.ReadLine());
-            Console.WriteLine("Ingrese Precio del Producto");
-            decimal precioProducto = decimal.Parse(Console.ReadLine());
-            Console.WriteLine("Ingrese Stock del Producto");
-            int stockProducto = int.Parse(Console.ReadLine());
-
-            Producto nuevoProducto = new Producto
+            using (var context = new AplicationDbContext())
             {
-                Id = idProducto,
-                Nombre = nombreProducto,
-                Precio = precioProducto,
-                Stock = stockProducto
-            };
+                context.Producto.Add(producto);
+                context.SaveChanges();
+            }
 
-            RegistrarProducto(nuevoProducto);
 
+        }
+        public static Producto ObtenerProductoPorId(int id)
+        {
+            using (var context = new AplicationDbContext())
+            {
+                var producto = context.Producto.Find(id);
+                if (producto != null)
+                {
+                    return producto;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
     }
 }
