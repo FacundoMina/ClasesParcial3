@@ -42,7 +42,7 @@ namespace ClasesParcial3.Repositories
             }
         }
 
-        public static void MostrarVentas(Models.Venta venta)
+        public static void MostrarVentas()
         {
             using (var context = new Data.AplicationDbContext())
             {

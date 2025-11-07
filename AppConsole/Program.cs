@@ -4,6 +4,7 @@ using ClasesParcial3.Models;
 using ClasesParcial3.Data;
 using ClasesParcial3.Repositories;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 do
 {
     Console.WriteLine("===============================");
